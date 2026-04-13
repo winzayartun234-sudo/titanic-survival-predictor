@@ -52,6 +52,6 @@ if st.button("Predict"):
     probability = model.predict_proba(input_data)[0][1]
 
     if prediction == 1:
-        st.success(f"🎉 Survived (Probability: {probability:.2f})")
+        st.success(f"🎉 You can survive (Probability: {probability:.2f})")
     else:
-        st.error(f"❌ Did Not Survive (Probability: {probability:.2f})")
+        st.error(f"❌ Sad to say , you won't survive (Probability: {probability:.2f})")
