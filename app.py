@@ -23,8 +23,17 @@ sex = st.selectbox("Sex", ["male", "female"])
 embarked = st.selectbox("Port of Embarkation", ["S", "C", "Q"])
 pclass = st.selectbox("Passenger Class", ["First", "Second", "Third"])
 
-who = st.selectbox("Who", ["man", "woman", "child"])
-adult_male = st.selectbox("Adult Male", [True, False])
+# ── Auto-derive 'who' ──────────────────────────────────────────────
+if age < 18:
+    who = "child"
+    st.info("👶 **Who:** Child (auto-set because age < 18)")
+else:
+    who = st.selectbox("Who", ["man", "woman"])   # adults only
+
+# ── Auto-derive 'adult_male' ───────────────────────────────────────
+adult_male = (age >= 18) and (sex == "male")
+st.write(f"🔎 **Adult Male:** `{adult_male}` (auto-derived)")
+
 embark_town = st.selectbox("Embark Town", ["Southampton", "Cherbourg", "Queenstown"])
 alone = st.selectbox("Traveling Alone", [True, False])
 
@@ -54,4 +63,4 @@ if st.button("Predict"):
     if prediction == 1:
         st.success(f"🎉 You can survive (Probability: {probability:.2f})")
     else:
-        st.error(f"❌ Sad to say , you won't survive (Probability: {probability:.2f})")
+        st.error(f"❌ Sad to say, you won't survive (Probability: {probability:.2f})")
